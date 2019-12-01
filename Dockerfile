@@ -1,4 +1,4 @@
-FROM amd64/debian:11
+FROM amd64/debian:bullseye
 MAINTAINER asteinh
 
 ENV DEBIAN_FRONTEND noninteractive
