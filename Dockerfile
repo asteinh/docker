@@ -4,7 +4,8 @@ MAINTAINER asteinh
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
-RUN apt-get install -y octave=5.1.0-4+b1
+RUN apt-get install -y curl tar
+RUN apt-get install -y octave=5.1.0-4+b1 liboctave-dev
 
 RUN useradd -ms /bin/bash octave
 RUN chown -R octave:octave /home/octave/
