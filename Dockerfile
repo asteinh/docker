@@ -6,7 +6,7 @@ RUN apk add --update --no-cache \
     bash git openssh
 
 # install docker
-RUN apk add --no-cache docker-cli
+# RUN apk add --no-cache docker-cli
 
 # install gh-pages
 RUN npm install -g --silent gh-pages@2.2.0
