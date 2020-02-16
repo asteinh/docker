@@ -1,32 +1,36 @@
-FROM ubuntu:bionic
+FROM node:lts-alpine
 
 MAINTAINER asteinh
 
-RUN apt-get update
-RUN apt-get install -y curl git
+RUN apk add --update --no-cache \
+    bash git openssh
 
 # install docker
-RUN mkdir -p /tmp/docker
-RUN curl https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_19.03.6~3-0~ubuntu-bionic_amd64.deb -o /tmp/docker/docker-ce-cli.deb
-RUN dpkg -i /tmp/docker/docker-ce-cli.deb
-RUN rm -rf /tmp/docker
+RUN apk add --no-cache docker-cli
 
-# install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-RUN apt-get install -y nodejs
+# install gh-pages
 RUN npm install -g --silent gh-pages@2.2.0
+RUN npm cache clean --force
 
-RUN useradd -ms /bin/bash cibuild
+# install python & sphinx
+RUN apk add --no-cache python3
+RUN python3 -m ensurepip && pip3 install --no-cache --upgrade pip
+RUN pip3 install --no-cache \
+    sphinx \
+    sphinx_rtd_theme \
+    recommonmark \
+    sphinxcontrib-matlabdomain
+
+# create user
+RUN mkdir -p /home/cibuild
+RUN adduser --home /home/cibuild --shell /bin/bash cibuild --disabled-password
 RUN chown -R cibuild:cibuild /home/cibuild/
 USER cibuild
 WORKDIR /home/cibuild
 
 # git config
-RUN git config user.email "docker@tensorflowm-ci"
-RUN git config user.name "tensorflowm-ci"
+RUN git config --global user.email "docker@tensorflowm-ci"
+RUN git config --global user.name "tensorflowm-ci"
 RUN ssh -o "StrictHostKeyChecking no" github.com || true
-
-# cleanup
-RUN rm -rf /tmp/*
 
 ENTRYPOINT ["/bin/bash"]
