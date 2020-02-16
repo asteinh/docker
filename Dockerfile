@@ -16,4 +16,6 @@ RUN chown -R cibuild:cibuild /home/cibuild/
 USER cibuild
 WORKDIR /home/cibuild
 
+RUN rm -rf /tmp/docker
+
 ENTRYPOINT ["/bin/bash"]
