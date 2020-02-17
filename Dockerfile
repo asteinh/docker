@@ -3,7 +3,7 @@ FROM node:lts-alpine
 MAINTAINER asteinh
 
 RUN apk add --update --no-cache \
-    bash git openssh
+    bash git openssh make
 
 # install docker
 RUN apk add --no-cache docker-cli
