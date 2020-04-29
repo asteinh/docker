@@ -4,7 +4,7 @@ MAINTAINER asteinh
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install make
+RUN apt-get -y install make git
 
 RUN pip install numpy \
     svg.path==4.0.2 \
