@@ -2,6 +2,10 @@ FROM python:3.6.10-slim-buster
 
 MAINTAINER asteinh
 
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y install make
+
 RUN pip install numpy \
     svg.path==4.0.2 \
     casadi==3.5.1 \
