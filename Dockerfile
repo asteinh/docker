@@ -11,7 +11,10 @@ RUN pip install numpy \
     casadi==3.5.1 \
     Sphinx \
     recommonmark \
-    sphinx-rtd-theme
+    sphinx-rtd-theme \
+    coverage \
+    nose2 \
+    codecov
 
 RUN useradd -ms /bin/bash sympathor && \
     chown -R sympathor:sympathor /home/sympathor/
