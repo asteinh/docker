@@ -13,7 +13,7 @@ RUN pip install numpy \
     recommonmark \
     sphinx-rtd-theme \
     coverage \
-    nose2 \
+    pytest \
     codecov
 
 RUN useradd -ms /bin/bash sympathor && \
